@@ -14,6 +14,19 @@ const partnerRouter = require('./routes/partnerRouter');
 var app = express();
 
 // view engine setup
+const mongoose = require('mongoose');
+
+const url = 'mongodb://localhost:27017/nucampsite';
+const connect = mongoose.connect(url, {
+    useCreateIndex: true,
+    useFindAndModify: false,
+    useNewUrlParser: true, 
+    useUnifiedTopology: true
+});
+
+connect.then(() => console.log('Connected correctly to server'), 
+    err => console.log(err)
+);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
