@@ -7,8 +7,12 @@ const { register } = require('../models/user');
 const router = express.Router();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/', authenticate.verifyUser, authenticate.verifyAdmin, function(req, res, next) {
+   User.find()
+   .then(users => {
+    res.status = 200;
+    res.json(users);
+   })
 });
 
 router.post('/signup', (req, res) => {
